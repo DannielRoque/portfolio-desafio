@@ -1,4 +1,4 @@
-package com.example.feednoticias.ui.home
+package com.example.feednoticias.presentation.portal.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.feednoticias.databinding.FragmentHomeBinding
+import com.example.feednoticias.databinding.FragmentPortalBinding
+import com.example.feednoticias.presentation.portal.viewmodel.PortalViewModel
 
-class HomeFragment : Fragment() {
+class PortalFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentPortalBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,14 +20,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val portalViewModel =
+            ViewModelProvider(this).get(PortalViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentPortalBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        portalViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
