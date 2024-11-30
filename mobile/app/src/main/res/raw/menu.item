@@ -1,0 +1,32 @@
+{
+  "menuItems": [
+    {
+      "title": "Agro",
+      "url": "http://g1.globo.com/economia/agronegocios/"
+    },
+    {
+      "title": "Bem estar",
+      "url": "https://g1.globo.com/bemestar/"
+    },
+    {
+      "title": "Carros",
+      "url": "http://g1.globo.com/carros/"
+    },
+    {
+      "title": "Ciência e saúde",
+      "url": "http://g1.globo.com/ciencia-e-saude/"
+    },
+    {
+      "title": "Economia",
+      "url": "http://g1.globo.com/economia/"
+    },
+    {
+      "title": "Educação",
+      "url": "http://g1.globo.com/educacao/"
+    },
+    {
+      "title": "Fato ou fake",
+      "url": "https://g1.globo.com/fato-ou-fake/"
+    }
+  ]
+}

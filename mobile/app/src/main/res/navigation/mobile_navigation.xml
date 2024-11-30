@@ -21,10 +21,19 @@
         android:id="@+id/navigation_menu"
         android:name="com.example.feednoticias.presentation.menu.ui.MenuFragment"
         android:label="@string/title_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.feednoticias.presentation.details.ui.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>

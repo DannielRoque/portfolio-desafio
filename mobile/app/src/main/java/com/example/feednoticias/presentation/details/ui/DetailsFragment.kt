@@ -1,60 +1,105 @@
 package com.example.feednoticias.presentation.details.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.feednoticias.R
+import com.example.feednoticias.databinding.FragmentDetailsBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+internal class DetailsFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class DetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false)
+    ): View {
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupWebView()
+        hideBottomNavWithAnimation()
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showBottomNavWithAnimation()
+                isEnabled = false
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        })
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupWebView() = with(binding) {
+        webview.settings.javaScriptEnabled = true
+        webview.webViewClient = WebViewClient()
+
+        webview.webViewClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: android.graphics.Bitmap?) {
+                progressBar.visibility = View.VISIBLE
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                progressBar.visibility = View.GONE
+            }
+        }
+
+        webview.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                if (newProgress < PROGRESS_BAR_MAX) {
+                    progressBar.visibility = View.VISIBLE
+                } else {
+                    progressBar.visibility = View.GONE
+                }
+            }
+        }
+
+        val url = arguments?.getString(PARAM_URL)
+        url?.let {
+            binding.webview.loadUrl(it)
+        }
+    }
+
+    private fun hideBottomNavWithAnimation() {
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNav?.animate()
+            ?.translationY(bottomNav.height.toFloat())
+            ?.setDuration(ANIMATION_DURATION)
+            ?.withEndAction { bottomNav.visibility = View.GONE }
+            ?.start()
+    }
+
+    private fun showBottomNavWithAnimation() {
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNav?.apply {
+            visibility = View.VISIBLE
+            animate()
+                .translationY(PARAM_TRANSLATION)
+                .setDuration(ANIMATION_DURATION)
+                .start()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        const val ANIMATION_DURATION = 300L
+        const val PROGRESS_BAR_MAX = 100
+        const val PARAM_URL = "url"
+        const val PARAM_TRANSLATION = 0f
     }
 }

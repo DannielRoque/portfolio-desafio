@@ -20,3 +20,6 @@ Dia 2 do desafio:
 Escolhido a arquitetura, realizado a divisão das pastas e adicionando as primeiras libs para a primeira
 chamada da api.
 
+Dia 3 do desafio
+Adicionado o menu, com o menu.json local assim seguindo o padrão para abrir o webview com os detalhes.
+
