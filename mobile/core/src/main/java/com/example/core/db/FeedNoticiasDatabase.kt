@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [PortalViewData::class], version = 1, exportSchema = false)
+//@Database(entities = [PortalViewData::class], version = 1, exportSchema = false)
 abstract class FeedNoticiasDatabase : RoomDatabase() {
 
-    abstract fun PortalDao(): PortalDao
+//    abstract fun PortalDao(): PortalDao
 
     companion object {
         @Volatile

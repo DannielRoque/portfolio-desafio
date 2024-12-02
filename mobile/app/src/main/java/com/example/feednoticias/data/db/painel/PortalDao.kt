@@ -1,10 +1,12 @@
 package com.example.feednoticias.data.db.painel
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.feednoticias.data.entity.PortalViewData
 
+@Dao
 interface PortalDao {
 
     @Query("SELECT * FROM portal_table")

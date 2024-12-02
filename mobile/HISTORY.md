@@ -23,3 +23,14 @@ chamada da api.
 Dia 3 do desafio
 Adicionado o menu, com o menu.json local assim seguindo o padrão para abrir o webview com os detalhes.
 
+Dia 4 do desafio
+Foi adicionado as configuracoes iniciais do retrofit pra chamada na API
+Iniciamos o Layout do Recyclerview pra apresentacao dos valore
+
+Dia 5 do desafio
+Foi Refatorado a comunicacao do retrofit 
+Adicionado injeção de dependências com koin 
+
+# Para o cumprimento da data será adicionado Teste instrumentado e Unitário
+
+

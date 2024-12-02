@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+
+ext {
+    usesKoin = true
+    usesRetrofit = true
+    usesCoroutines = true
+    usesConstraintLayout = true
+    usesMaterial = true
+    usesLiveDataKtx = true
+    usesRuntimeKtx = true
+    usesViewModelKtx = true
+    usesRXJava = true
+    usesRXAndroid = true
+    usesUnitTest = true
+    usesKoinTest = true
+    usesCoroutinesTest = true
+    usesmockitokotlin2 = true
+    usesEspresso = true
+    usesCoreTest = true
+    usesAndroidTest = true
+    usesCoil = true
+    usesRoom = true
+    usesNavigation = true
+}
+
+apply from: "../dependencies/dependencies.gradle"
+apply from: "../dependencies/projectSetup.gradle"
+
+
+android {
+    namespace = "com.example.feednoticias"
+    compileSdkVersion = systemVersions.compileVersion
+
+    defaultConfig {
+        applicationId = "com.example.feednoticias"
+        minSdk = 21
+        targetSdk = 34
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation project(':core')
+}
