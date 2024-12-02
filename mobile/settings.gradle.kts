@@ -17,7 +17,14 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("projectSetup") {
+            from(files("gradle/projectSetup.versions.toml"))
+        }
+    }
 }
 
 rootProject.name = "FeedNoticias"
 include(":app")
+include(":core")
+include(":dependencies")

@@ -1,0 +1,3 @@
+def verifyProp(String prop) {
+    return project.hasProperty(prop) && (project[prop].toBoolean() == true)
+}

@@ -1,13 +1,24 @@
 package com.example.feednoticias.presentation.portal.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.feednoticias.business.portal.PortalBusiness
+import kotlinx.coroutines.launch
 
-class PortalViewModel : ViewModel() {
+class PortalViewModel(application: Application,
+    private val business : PortalBusiness) : AndroidViewModel(application) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun loadInitialFeed() {
+        viewModelScope.launch {
+            try {
+                val items = business.loadInitialFeed()
+            } catch (e : Exception) {
+                Log.e("PortalViewModel", "Error loading initial feed")
+            } finally {
+
+            }
+        }
     }
-    val text: LiveData<String> = _text
 }

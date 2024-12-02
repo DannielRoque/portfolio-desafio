@@ -15,21 +15,20 @@ class PortalFragment : Fragment() {
     private var _binding: FragmentPortalBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: PortalViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val portalViewModel =
+        viewModel =
             ViewModelProvider(this).get(PortalViewModel::class.java)
 
         _binding = FragmentPortalBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        portalViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
     }
 

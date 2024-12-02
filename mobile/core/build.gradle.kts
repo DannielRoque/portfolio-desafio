@@ -1,16 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.navigation.safeargs)
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.feednoticias"
+    namespace = "com.example.core"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.feednoticias"
+        applicationId = "com.example.core"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
@@ -35,9 +34,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
@@ -45,16 +41,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.gson)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.retrofit)
-    implementation(libs.androidx.retrofit.converter)
-    implementation(libs.androidx.paging)
-    implementation(libs.androidx.recyclerview)
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
     testImplementation(libs.junit)
