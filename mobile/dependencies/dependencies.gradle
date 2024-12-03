@@ -19,7 +19,7 @@ ext {
             okhttp_version          : '4.12.0',
             junit_version           : '4.13.2',
             mockito_version         : '4.2.0',
-            mockito_kotlin_version  : '3.2.0',
+            mockito_kotlin_version  : '4.0.0',
             test_runner_version     : '1.6.2',
             espresso_version        : '3.6.1',
             koin_version            : "3.5.6",
@@ -76,7 +76,7 @@ ext {
 
             junit_test             : "junit:junit:$projectDependenciesVersion.junit_version",
             mockito_test           : "org.mockito:mockito-core:$projectDependenciesVersion.mockito_version",
-            mockito_kotlin_test    : "com.nhaarman.mockitokotlin2:mockito-kotlin:$projectDependenciesVersion.mockito_kotlin_version",
+            mockito_kotlin_test    : "org.mockito.kotlin:mockito-kotlin:$projectDependenciesVersion.mockito_kotlin_version",
             core_testing           : "androidx.arch.core:core-testing:$projectDependenciesVersion.core_testing_version",
 
             test_runner            : "androidx.test:runner:$projectDependenciesVersion.test_runner_version",

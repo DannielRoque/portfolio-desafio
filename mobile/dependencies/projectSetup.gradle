@@ -119,6 +119,8 @@ dependencies {
     if (verifyProp('usesUnitTest')) {
         testImplementation deps.junit_test
         testImplementation deps.core_testing
+        testImplementation deps.mockito_test
+        testImplementation deps.mockito_kotlin_test
     }
 
     if (verifyProp('usesKoinTest')) {
