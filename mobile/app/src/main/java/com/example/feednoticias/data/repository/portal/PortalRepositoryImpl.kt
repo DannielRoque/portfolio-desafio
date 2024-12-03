@@ -33,7 +33,26 @@ class PortalRepositoryImpl(
         }
     }
 
-    override suspend fun getPaginetedFeed(offerId: String, page: Int): List<PortalViewData> {
-        TODO("Not yet implemented")
+    override suspend fun getPaginetedFeed(page: Int): List<PortalViewData> {
+        return try {
+            val response = api.getPaginatedFeed(product = "g1", page = page)
+            val items = response.map { apiItem ->
+                PortalViewData(
+                    id = apiItem.id,
+                    titulo = apiItem.titulo,
+                    descricao = apiItem.descricao,
+                    imagem = apiItem.imagem,
+                    chapeu = apiItem.chapeu,
+                    date = apiItem.date,
+                    url = apiItem.url,
+                    type = apiItem.type
+                )
+            }
+
+            portalDao.insertPortalData(items)
+            items
+        } catch (e: Exception) {
+            portalDao.getAllPortalData()
+        }
     }
 }

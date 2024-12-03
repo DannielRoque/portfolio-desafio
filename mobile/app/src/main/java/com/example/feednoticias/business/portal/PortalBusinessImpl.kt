@@ -21,8 +21,8 @@ class PortalBusinessImpl(
             }
     }
 
-    override suspend fun loadMoreFeed(offerId: String, page: Int): List<PortalViewData> {
-        val items = portalRepository.getPaginetedFeed(offerId, page)
+    override suspend fun loadNextPage(page: Int): List<PortalViewData> {
+        val items = portalRepository.getPaginetedFeed(page)
         return items.filter { it.type in listOf("basico", "materia") }
             .map { item -> if (item.chapeu.isNullOrEmpty()) item.copy(chapeu = "Notícia") else item }
     }
